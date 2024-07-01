@@ -38,10 +38,10 @@ exports.search = async (req, res, next) => {
 };
 
 /**
- * search for airpots.
+ * search for airports.
  * @public
  */
-exports.airpots = async (req, res, next) => {
+exports.airports = async (req, res, next) => {
   try {
     const {
       keyword,
@@ -54,7 +54,7 @@ exports.airpots = async (req, res, next) => {
     res.status(httpStatus.OK);
     return res.json({
       success: true,
-      message: 'AMADEUS Airpots Search Result.',
+      message: 'AMADEUS Airports Search Result.',
       data: response.data,
     });
   } catch (error) {

@@ -11,8 +11,8 @@ module.exports = {
     },
   },
 
-  // GET /v1/flight/airpots
-  airpots: {
+  // GET /v1/flight/airports
+  airports: {
     query: {
       keyword: Joi.string().required(),
     },
