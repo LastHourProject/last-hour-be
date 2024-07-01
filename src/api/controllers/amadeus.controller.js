@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const httpStatus = require('http-status');
 const Amadeus = require('amadeus');
 const { amadeusClientId, amadeusClientSecret } = require('../../config/vars');
@@ -27,6 +28,31 @@ exports.search = async (req, res, next) => {
     return res.json({
       success: true,
       message: 'AMADEUS Flight Search Result.',
+      data: response.data,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+/**
+ * search for airpots.
+ * @public
+ */
+exports.airpots = async (req, res, next) => {
+  try {
+    const {
+      keyword,
+    } = req.query;
+    const response = await amadeus.referenceData.locations.get({
+      keyword,
+      subType: 'AIRPORT,CITY',
+    });
+
+    res.status(httpStatus.OK);
+    return res.json({
+      success: true,
+      message: 'AMADEUS Airpots Search Result.',
       data: response.data,
     });
   } catch (error) {

@@ -2,7 +2,7 @@ const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/amadeus.controller');
 const { authorize } = require('../../middlewares/auth');
-const { search } = require('../../validations/amadeus.validation');
+const { search, airpots } = require('../../validations/amadeus.validation');
 
 const router = express.Router();
 
@@ -34,5 +34,7 @@ router
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
   .post(authorize(), validate(search), controller.search);
+
+router.route('/airpots').get(authorize(), validate(airpots), controller.airpots);
 
 module.exports = router;
