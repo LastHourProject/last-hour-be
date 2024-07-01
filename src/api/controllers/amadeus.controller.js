@@ -1,4 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const httpStatus = require('http-status');
 const Amadeus = require('amadeus');
 const { amadeusClientId, amadeusClientSecret } = require('../../config/vars');
