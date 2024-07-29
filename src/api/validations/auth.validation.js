@@ -65,7 +65,7 @@ module.exports = {
         .min(6)
         .max(128),
       password_confirmation: Joi.any().valid(Joi.ref('password')).required().options({ language: { any: { allowOnly: 'must match password' } } }),
-      verification_code: Joi.string().required(),
+      verificationCode: Joi.string().required(),
     },
   },
 
@@ -75,7 +75,7 @@ module.exports = {
       email: Joi.string()
         .email()
         .required(),
-      verification_code: Joi.string()
+      verificationCode: Joi.string()
         .required()
         .max(6),
     },

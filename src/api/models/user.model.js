@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   },
   verificationCode: {
     type: String,
-    required: true,
+    default: null,
   },
   emailVerifiedAt: {
     type: Date,
@@ -50,6 +50,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: roles,
     default: 'user',
+  },
+  services: {
+    facebook: String,
+    google: String,
   },
 }, {
   timestamps: true,

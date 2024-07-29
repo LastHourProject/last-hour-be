@@ -1,8 +1,7 @@
 const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/amadeus.controller');
-const { authorize } = require('../../middlewares/auth');
-const { search, airports } = require('../../validations/amadeus.validation');
+const { search, airports, airlines } = require('../../validations/amadeus.validation');
 
 const router = express.Router();
 
@@ -33,8 +32,10 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated users can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .post(authorize(), validate(search), controller.search);
+  .post(validate(search), controller.search);
 
-router.route('/airports').get(authorize(), validate(airports), controller.airports);
+router.route('/airports').get(validate(airports), controller.airports);
+
+router.route('/airlines').get(validate(airlines), controller.airlines);
 
 module.exports = router;
