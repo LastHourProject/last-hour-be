@@ -19,7 +19,7 @@ exports.search = async (req, res, next) => {
     const {
       origin, destination, departureDate, adults,
       includedAirlineCodes, returnDate, currencyCode,
-      children,
+      children, limit,
     } = req.body;
     // create payload for search
     const params = {
@@ -33,6 +33,8 @@ exports.search = async (req, res, next) => {
     if (includedAirlineCodes) params.includedAirlineCodes = includedAirlineCodes.toString();
     // check if return date available in body
     if (returnDate) params.returnDate = returnDate;
+
+    if (limit) params.max = limit;
     // check if children and their age exists
     if (children) {
       params.children = children;
@@ -83,7 +85,6 @@ exports.airlines = async (req, res, next) => {
     const response = await amadeus.referenceData.airlines.get({ airlineCodes });
 
     if (name && response.data.length) {
-      // eslint-disable-next-line max-len
       const filterData = response.data.filter((item) => item.businessName.toLowerCase().includes(name.toLowerCase()));
 
       res.status(httpStatus.OK);
@@ -101,7 +102,6 @@ exports.airlines = async (req, res, next) => {
       data: response.data,
     });
   } catch (error) {
-    console.log(error, '::');
     return next(error);
   }
 };
